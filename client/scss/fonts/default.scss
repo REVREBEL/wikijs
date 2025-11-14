@@ -110,7 +110,7 @@
   font-family: "Noto Emoji";
   src: url('../../fonts/default/noto-emoji-variable.woff2') format('woff2');
   font-style: normal;
-  font-weight: 400
+  font-weight: 400;
   font-display: swap;
   // restrict this face to emoji codepoints so it won't touch normal text
   unicode-range:
@@ -136,7 +136,7 @@
   font-weight: 800;
   font-display: swap;
   src: url('../../fonts/default/barlow-bold.woff2') format('woff2'),
-    url('../../fonts/default/barlow-bold.woff') format('woff');
+       url('../../fonts/default/barlow-bold.woff') format('woff');
 }
 
 /* Barlow (variable, 800–900) */
@@ -146,5 +146,5 @@
   font-weight: 900;
   font-display: swap;
   src: url('../../fonts/default/barlow-black.woff2') format('woff2'),
-    url('../../fonts/default/barlow-black.woff') format('woff');
+       url('../../fonts/default/barlow-black.woff') format('woff');
 }
