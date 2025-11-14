@@ -63,6 +63,11 @@
     }
   }
 
+
+
+
+
+
   // ---------------------------------
   // HEADERS
   // ---------------------------------
@@ -1652,4 +1657,9 @@ code[class*=language-], pre[class*=language-] {
     transform-origin: center center;
     transform: scale(.2);
     transition: inherit;
+}
+
+
+body {
+  font-family: var(--wk-font-sans), "Noto Emoji", sans-serif;
 }
