@@ -100,10 +100,34 @@
 @font-face {
   font-family: 'Noto Emoji';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-display: swap;
   src: url('../../fonts/default/noto-emoji-variable.woff2') format('woff2');
 }
+
+// Emoji font – Noto Emoji variable
+@font-face {
+  font-family: "Noto Emoji";
+  src: url('../../fonts/default/noto-emoji-variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400
+  font-display: swap;
+  // restrict this face to emoji codepoints so it won't touch normal text
+  unicode-range:
+    U+1F300-1F5FF,  /* Misc Symbols and Pictographs */
+    U+1F600-1F64F,  /* Emoticons */
+    U+1F680-1F6FF,  /* Transport & Map */
+    U+1F700-1F77F,
+    U+1F780-1F7FF,
+    U+1F800-1F8FF,
+    U+1F900-1F9FF,
+    U+1FA00-1FA6F,
+    U+1FA70-1FAFF,
+    U+2600-26FF,    /* Misc symbols */
+    U+2700-27BF;    /* Dingbats */
+}
+
+
 
 /* Barlow (variable, 800–900) */
 @font-face {
