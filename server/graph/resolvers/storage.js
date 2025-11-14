@@ -13,6 +13,10 @@ module.exports = {
   StorageQuery: {
     async targets(obj, args, context, info) {
       let targets = await WIKI.models.storage.getTargets()
+      const multiGitEnabled = _.get(WIKI.config, 'features.featureMultiGitProfiles', false)
+      if (multiGitEnabled) {
+        targets = targets.filter(tgt => tgt.key !== 'git')
+      }
       targets = _.sortBy(targets.map(tgt => {
         const targetInfo = _.find(WIKI.data.storage, ['key', tgt.key]) || {}
         return {
@@ -35,20 +39,87 @@ module.exports = {
           }, []), 'key')
         }
       }), ['title', 'key'])
+      if (multiGitEnabled) {
+        targets.push({
+          key: 'git-profiles',
+          title: 'Git Profiles',
+          description: 'Manage multiple Git storage profiles.',
+          isSynthetic: true,
+          isAvailable: true,
+          isEnabled: false,
+          supportedModes: [],
+          mode: 'sync',
+          hasSchedule: false,
+          syncInterval: null,
+          syncIntervalDefault: null,
+          config: [],
+          actions: []
+        })
+      }
       return targets
     },
     async status(obj, args, context, info) {
       let activeTargets = await WIKI.models.storage.query().where('isEnabled', true)
-      return activeTargets.map(tgt => {
+      const multiGitEnabled = _.get(WIKI.config, 'features.featureMultiGitProfiles', false)
+      if (multiGitEnabled) {
+        activeTargets = activeTargets.filter(tgt => tgt.key !== 'git')
+      }
+      const statuses = activeTargets.map(tgt => {
         const targetInfo = _.find(WIKI.data.storage, ['key', tgt.key]) || {}
         return {
           key: tgt.key,
           title: targetInfo.title,
           status: _.get(tgt, 'state.status', 'pending'),
           message: _.get(tgt, 'state.message', 'Initializing...'),
-          lastAttempt: _.get(tgt, 'state.lastAttempt', null)
+          lastAttempt: _.get(tgt, 'state.lastAttempt', null),
+          isSynthetic: false
         }
       })
+      if (multiGitEnabled) {
+        const profiles = await WIKI.models.storageProfiles.query().orderBy('name', 'asc')
+        const profileIds = profiles.map(p => p.id)
+        let latestRuns = []
+        if (profileIds.length > 0) {
+          latestRuns = await WIKI.models.storageProfileRuns.query()
+            .whereIn('profileId', profileIds)
+            .orderBy('startedAt', 'desc')
+        }
+        const latestRunMap = new Map()
+        for (const run of latestRuns) {
+          if (!latestRunMap.has(run.profileId)) {
+            latestRunMap.set(run.profileId, run)
+          }
+        }
+        for (const profile of profiles) {
+          const run = latestRunMap.get(profile.id)
+          let status = profile.enabled ? 'pending' : 'operational'
+          let message = profile.enabled ? 'Awaiting first sync.' : 'Profile disabled.'
+          let lastAttempt = null
+          if (run) {
+            if (run.status === 'success') {
+              status = 'operational'
+            } else if (run.status === 'warning') {
+              status = 'pending'
+            } else if (run.status === 'error') {
+              status = 'error'
+            }
+            message = run.message || `Last action: ${run.action || 'sync'}`
+            const ts = run.finishedAt || run.startedAt
+            if (ts) {
+              lastAttempt = new Date(ts).toISOString()
+            }
+          }
+          statuses.push({
+            key: `git-profile-${profile.id}`,
+            title: profile.name,
+            status,
+            message,
+            lastAttempt,
+            isSynthetic: true
+          })
+        }
+      }
+      return _.sortBy(statuses, ['title', 'key'])
     }
   },
   StorageMutation: {

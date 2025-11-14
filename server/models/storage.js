@@ -4,6 +4,7 @@ const fs = require('fs-extra')
 const _ = require('lodash')
 const yaml = require('js-yaml')
 const commonHelper = require('../helpers/common')
+const gitProfileManager = require('../modules/storage/git/profileManager')
 
 /* global WIKI */
 
@@ -116,6 +117,22 @@ module.exports = class Storage extends Model {
    */
   static async initTargets() {
     this.targets = await WIKI.models.storage.query().where('isEnabled', true).orderBy('key')
+    const multiGitEnabled = _.get(WIKI.config, 'features.featureMultiGitProfiles', false)
+
+    if (multiGitEnabled) {
+      this.targets = this.targets.filter(target => target.key !== 'git')
+      try {
+        await gitProfileManager.init()
+        WIKI.gitProfiles = gitProfileManager
+      } catch (err) {
+        WIKI.logger.error(`Failed to initialize Git storage profiles: ${err.message}`)
+        if (WIKI.IS_DEBUG) {
+          WIKI.logger.error(err)
+        }
+      }
+    } else {
+      WIKI.gitProfiles = null
+    }
     try {
       // -> Stop and delete existing jobs
       const prevjobs = _.remove(WIKI.scheduler.jobs, job => job.name === `sync-storage`)
@@ -182,6 +199,9 @@ module.exports = class Storage extends Model {
       for (let target of this.targets) {
         await target.fn[event](page)
       }
+      if (_.get(WIKI.config, 'features.featureMultiGitProfiles', false) && WIKI.gitProfiles) {
+        await WIKI.gitProfiles.handlePageEvent(event, page)
+      }
     } catch (err) {
       WIKI.logger.warn(err)
       throw err
@@ -192,6 +212,9 @@ module.exports = class Storage extends Model {
     try {
       for (let target of this.targets) {
         await target.fn[`asset${_.capitalize(event)}`](asset)
+      }
+      if (_.get(WIKI.config, 'features.featureMultiGitProfiles', false) && WIKI.gitProfiles) {
+        await WIKI.gitProfiles.handleAssetEvent(event, asset)
       }
     } catch (err) {
       WIKI.logger.warn(err)

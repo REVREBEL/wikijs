@@ -53,3 +53,74 @@
   font-weight: normal;
   font-style: normal;
 }
+
+
+
+/* Khand (variable, 300–700) */
+@font-face {
+  font-family: Khand;
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../../fonts/default/khand-variable.woff2') format('woff2'),
+    url('../../fonts/default/khand-variable.woff') format('woff');
+}
+
+/* Fira Code (variable, 300–500) */
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('../../fonts/default/fira-code-variable.woff2') format('woff2'),
+    url('../../fonts/default/fira-code-variable.woff') format('woff');
+}
+
+/* General Sans (variable, 300–500) */
+@font-face {
+  font-family: 'General Sans';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('../../fonts/default/general-sans-variable.woff2') format('woff2'),
+    url('../../fonts/default/general-sans-variable.woff') format('woff');
+}
+
+/* Supreme (variable, 300–800) */
+@font-face {
+  font-family: Supreme;
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('../../fonts/default/supreme-variable.woff2') format('woff2'),
+    url('../../fonts/default/supreme-variable.woff') format('woff');
+}
+
+/* Noto Emoji (variable, constrained to 700) */
+@font-face {
+  font-family: 'Noto Emoji';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../fonts/default/noto-emoji-variable.woff2') format('woff2');
+}
+
+/* Barlow (variable, 800–900) */
+@font-face {
+  font-family: Barlow;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../../fonts/default/barlow-bold.woff2') format('woff2'),
+    url('../../fonts/default/barlow-bold.woff') format('woff');
+}
+
+/* Barlow (variable, 800–900) */
+@font-face {
+  font-family: Barlow;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../../fonts/default/barlow-black.woff2') format('woff2'),
+    url('../../fonts/default/barlow-black.woff') format('woff');
+}

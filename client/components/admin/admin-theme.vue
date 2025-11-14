@@ -140,7 +140,7 @@ export default {
     return {
       loading: false,
       themes: [
-        { text: 'Default', author: 'requarks.io', value: 'default', isInstalled: true, installDate: '', updatedAt: '' }
+        { text: 'Default', value: 'default', author: 'requarks.io' }
       ],
       iconsets: [
         { text: 'Material Design Icons (default)', value: 'mdi' },
@@ -238,10 +238,59 @@ export default {
     }
   },
   apollo: {
-    config: {
+    themingData: {
       query: themeConfigQuery,
       fetchPolicy: 'network-only',
-      update: (data) => data.theming.config,
+      result({ data }) {
+        const cfg = _.get(data, 'theming.config', {})
+        this.config = {
+          ...this.config,
+          theme: _.get(cfg, 'theme', this.config.theme),
+          iconset: _.get(cfg, 'iconset', this.config.iconset),
+          tocPosition: _.get(cfg, 'tocPosition', this.config.tocPosition),
+          injectCSS: _.get(cfg, 'injectCSS', this.config.injectCSS),
+          injectHead: _.get(cfg, 'injectHead', this.config.injectHead),
+          injectBody: _.get(cfg, 'injectBody', this.config.injectBody)
+        }
+
+        if (_.has(cfg, 'darkMode')) {
+          this.darkMode = cfg.darkMode
+          this.darkModeInitial = cfg.darkMode
+        }
+
+        const themeItemsRaw = _.get(data, 'theming.themes', [])
+        const themeArray = Array.isArray(themeItemsRaw) ? themeItemsRaw : []
+        const mapped = themeArray
+          .filter(item => item && item.key)
+          .map(item => ({
+            text: _.get(item, 'title', _.startCase(item.key)),
+            value: item.key,
+            author: _.get(item, 'author', '')
+          }))
+
+        const deduped = _.uniqBy(mapped, 'value')
+        const sorted = _.sortBy(deduped, thm => thm.text.toLowerCase())
+
+        const currentTheme = _.get(this.config, 'theme')
+        const hasCurrent = sorted.some(thm => thm.value === currentTheme)
+        if (currentTheme && !hasCurrent) {
+          sorted.unshift({
+            text: _.startCase(currentTheme),
+            value: currentTheme,
+            author: ''
+          })
+        }
+
+        if (sorted.length === 0) {
+          sorted.push({
+            text: 'Default',
+            value: 'default',
+            author: 'requarks.io'
+          })
+        }
+
+        this.themes = sorted
+      },
       watchLoading (isLoading) {
         this.$store.commit(`loading${isLoading ? 'Start' : 'Stop'}`, 'admin-theme-refresh')
       }

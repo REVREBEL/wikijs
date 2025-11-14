@@ -1,0 +1,43 @@
+{
+  "effect": {
+    "$type": "shadow",
+    "shadow": {
+      "xxs": { "value": "0 1px 2px #0000001a" },
+      "xs": { "value": "0 2px 4px #0000001a" },
+      "sm": { "value": "0 2px 6px #0000001a" },
+      "md": { "value": "0 4px 8px #0000001a" },
+      "lg": { "value": "0 4px 16px #0000001a" },
+      "xl": { "value": "0 6px 24px #0000001a" },
+      "xxl": { "value": "0 6px 32px #0000001a" }
+    },
+    "filter": {
+      "to-brand": { "value": "invert(15%) sepia(75%) saturate(1308%) hue-rotate(194deg) brightness(95%) contrast(94%)" },
+      "to-facebook": { "value": "invert(34%) sepia(17%) saturate(1564%) hue-rotate(277deg) brightness(92%) contrast(89%)" },
+      "to-instagram": { "value": "invert(53%) sepia(85%) saturate(4480%) hue-rotate(335deg) brightness(94%) contrast(86%)" },
+      "to-linkedin": { "value": "invert(26%) sepia(80%) saturate(2128%) hue-rotate(169deg) brightness(93%) contrast(97%)" },
+      "to-blog": { "value": "invert(95%) sepia(17%) saturate(4211%) hue-rotate(309deg) brightness(113%) contrast(96%)" },
+      "to-github": { "value": "invert(15%) sepia(0%) saturate(0%) hue-rotate(251deg) brightness(98%) contrast(90%)" },
+      "to-x": { "value": "invert(81%) sepia(41%) saturate(374%) hue-rotate(123deg) brightness(84%) contrast(92%)" },
+      "to-telegram": { "value": "invert(90%) sepia(15%) saturate(576%) hue-rotate(162deg) brightness(92%) contrast(89%)" },
+      "to-rss": { "value": "invert(95%) sepia(17%) saturate(4211%) hue-rotate(309deg) brightness(113%) contrast(96%)" },
+      "to-email": { "value": "invert(17%) sepia(77%) saturate(2116%) hue-rotate(210deg) brightness(90%) contrast(79%)" },
+      "to-google": { "value": "invert(64%) sepia(13%) saturate(3377%) hue-rotate(323deg) brightness(99%) contrast(92%)" },
+      "invert": { "value": "invert()" }
+    },
+    "icon-color": {
+      "1": { "value": "invert(26%) sepia(80%) saturate(2128%) hue-rotate(169deg) brightness(93%) contrast(97%)" },
+      "2": { "value": "invert(60%) sepia(83%) saturate(5082%) hue-rotate(155deg) brightness(97%) contrast(101%)" },
+      "3": { "value": "invert(81%) sepia(41%) saturate(374%) hue-rotate(123deg) brightness(84%) contrast(92%)" },
+      "4": { "value": "invert(90%) sepia(15%) saturate(576%) hue-rotate(162deg) brightness(92%) contrast(89%)" },
+      "5": { "value": "invert(95%) sepia(17%) saturate(4211%) hue-rotate(309deg) brightness(113%) contrast(96%)" },
+      "6": { "value": "invert(64%) sepia(13%) saturate(3377%) hue-rotate(323deg) brightness(99%) contrast(92%)" },
+      "7": { "value": "invert(53%) sepia(85%) saturate(4480%) hue-rotate(335deg) brightness(94%) contrast(86%)" },
+      "8": { "value": "invert(34%) sepia(17%) saturate(1564%) hue-rotate(277deg) brightness(92%) contrast(89%)" },
+      "primary": { "value": "invert(15%) sepia(28%) saturate(3881%) hue-rotate(199deg) brightness(93%) contrast(91%)" },
+      "white": { "value": "invert(97%) sepia(0%) saturate(7112%) hue-rotate(301deg) brightness(128%) contrast(96%)" },
+      "grey-1": { "value": "invert(77%) sepia(0%) saturate(523%) hue-rotate(135deg) brightness(89%) contrast(90%)" },
+      "grey-2": { "value": "invert(33%) sepia(0%) saturate(1659%) hue-rotate(154deg) brightness(89%) contrast(77%)" },
+      "grey-3": { "value": "invert(15%) sepia(0%) saturate(0%) hue-rotate(251deg) brightness(98%) contrast(90%)" }
+    }
+  }
+}

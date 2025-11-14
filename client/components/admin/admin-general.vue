@@ -162,6 +162,15 @@
                     hint='Allow users to leave comments on pages.'
                     )
 
+                  v-switch.mt-4(
+                    inset
+                    label='Multi Git Profiles'
+                    color='indigo'
+                    v-model='config.featureMultiGitProfiles'
+                    persistent-hint
+                    hint='Enable multiple Git storage profiles.'
+                    )
+
                   //- v-divider.mt-3
                   //- v-switch(
                   //-   inset
@@ -295,6 +304,7 @@ export default {
         featurePageRatings: false,
         featurePageComments: false,
         featurePersonalWikis: false,
+        featureMultiGitProfiles: false,
         featureTinyPNG: false,
         pageExtensions: '',
         editFab: false,
@@ -363,6 +373,7 @@ export default {
               $featurePageRatings: Boolean
               $featurePageComments: Boolean
               $featurePersonalWikis: Boolean
+              $featureMultiGitProfiles: Boolean
               $editFab: Boolean
               $editMenuBar: Boolean
               $editMenuBtn: Boolean
@@ -387,6 +398,7 @@ export default {
                   featurePageRatings: $featurePageRatings
                   featurePageComments: $featurePageComments
                   featurePersonalWikis: $featurePersonalWikis
+                  featureMultiGitProfiles: $featureMultiGitProfiles
                   editFab: $editFab
                   editMenuBar: $editMenuBar
                   editMenuBtn: $editMenuBtn
@@ -420,6 +432,7 @@ export default {
             featurePageRatings: _.get(this.config, 'featurePageRatings', false),
             featurePageComments: _.get(this.config, 'featurePageComments', false),
             featurePersonalWikis: _.get(this.config, 'featurePersonalWikis', false),
+            featureMultiGitProfiles: _.get(this.config, 'featureMultiGitProfiles', false),
             editFab: _.get(this.config, 'editFab', false),
             editMenuBar: _.get(this.config, 'editMenuBar', false),
             editMenuBtn: _.get(this.config, 'editMenuBtn', false),
@@ -482,6 +495,7 @@ export default {
               featurePageRatings
               featurePageComments
               featurePersonalWikis
+              featureMultiGitProfiles
               editFab
               editMenuBar
               editMenuBtn

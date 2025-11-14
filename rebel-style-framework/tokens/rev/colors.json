@@ -1,0 +1,60 @@
+{
+  "color": {
+    "$type": "color",
+    "rev": {
+      "primary": { "value": "#163666" },
+      "dark-green": { "value": "#047c97" },
+      "green": { "value": "#00a6b6" },
+      "light-green": { "value": "#71c9c5" },
+      "light-blue": { "value": "#b2d3de" },
+      "yellow": { "value": "#faca78" },
+      "orange": { "value": "#f37d59" },
+      "red": { "value": "#e05047" },
+      "purple": { "value": "#8e456a" },
+      "smoke": { "value": "#eff5f6" },
+      "accent": { "value": "#b2d3de" },
+      "bg": { "value": "#fafafa" },
+      "grey": {
+        "grey-1": { "value": "#ababab" },
+        "grey-2": { "value": "#575757" },
+        "grey-3": { "value": "#2e2e2e" }
+      },
+      "light": { "value": "#fafafa" },
+      "dark": { "value": "{color.rev.primary}" },
+      "muted": { "value": "{color.rev.grey.grey-1}" },
+      "warning": { "value": "{color.rev.yellow}" },
+      "alert": { "value": "{color.rev.red}" },
+      "success": { "value": "{color.rev.primary}" },
+      "danger": { "value": "{color.rev.red}" },
+      "error": { "value": "{color.rev.red}" },
+      "disabled": { "value": "{color.rev.grey.grey-2}" },
+      "text": { "value": "{color.rev.dark}" },
+      "placeholder": { "value": "{color.rev.grey.grey-1}" },
+      "inverse": {
+        "primary": { "value": "{color.rev.light-blue}" },
+        "dark-green": { "value": "{color.rev.smoke}" },
+        "green": { "value": "{color.rev.yellow}" },
+        "light-green": { "value": "{color.rev.purple}" },
+        "light-blue": { "value": "{color.rev.primary}" },
+        "yellow": { "value": "{color.rev.red}" },
+        "orange": { "value": "{color.rev.primary}" },
+        "red": { "value": "{color.rev.light-blue}" },
+        "purple": { "value": "{color.rev.orange}" },
+        "smoke": { "value": "{color.rev.primary}" },
+        "grey": {
+          "grey-1": { "value": "{color.rev.grey.grey-3}" },
+          "grey-2": { "value": "{color.rev.light}" },
+          "grey-3": { "value": "{color.rev.grey.grey-1}" }
+        },
+        "light": { "value": "{color.rev.dark}" },
+        "dark": { "value": "{color.rev.light}" },
+        "text": { "value": "{color.rev.light}" }
+      }
+    },
+    "theme": {
+      "surface": { "value": "{color.rev.light}" },
+      "ink": { "value": "{color.rev.dark}" },
+      "border": { "value": "{color.rev.dark}" }
+    }
+  }
+}
