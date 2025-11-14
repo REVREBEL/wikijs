@@ -1,0 +1,278 @@
+{
+  ".v-main .contents": {
+    "color": "{color.rev.dark}",
+    "font-family": "{text.fonts.body}"
+  },
+  ".theme--dark .v-main .contents": {
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents a": {
+    "color": "{color.rev.green}"
+  },
+  ".theme--dark .v-main .contents a": {
+    "color": "{color.rev.inverse.green}"
+  },
+  ".v-main .contents a.is-internal-link.is-invalid-page": {
+    "color": "{color.rev.danger}"
+  },
+  ".theme--dark .v-main .contents a.is-internal-link.is-invalid-page": {
+    "color": "{color.rev.inverse.danger}"
+  },
+  ".v-main .contents a.is-external-link::after": {
+    "color": "{color.rev.muted}",
+    "font-family": "{text.fonts.body}"
+  },
+  ".v-main .contents h1, .v-main .contents h2, .v-main .contents h3, .v-main .contents h4, .    v-main .contents h5, .v-main .contents h6": {
+    "font-family": "{text.fonts.headline}",
+    "color": "{color.rev.dark}"
+  },
+  ".v-main .contents h1": {
+    "color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents h1": {
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents h2": {
+    "color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents h2": {
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents h3": {
+    "color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents h3": {
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents h4, .v-main .contents h5, .v-main .contents h6": {
+    "color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents h4, .theme--dark .v-main .contents h5, .theme--dark .v-main .contents h6": {
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents h1 .toc-anchor, .v-main .contents h2 .toc-anchor, .v-main .contents h3 .toc-anchor, .v-main .contents h4 .toc-anchor, .v-main .contents h5 .toc-anchor, .v-main .contents h6 .toc-anchor": {
+    "color": "{color.rev.dark}"
+  },
+  ".v-main .contents hr": {
+    "background-color": "{color.rev.smoke}"
+  },
+  ".theme--dark .v-main .contents hr": {
+    "background-color": "{color.rev.inverse.smoke"
+  },
+  ".v-main .contents code": {
+    "background-color": "{color.rev.smoke}",
+    "color": "{color.rev.dark}",
+    "font-family": "{text.fonts.code}"
+  },
+  ".theme--dark .v-main .contents code": {
+    "background-color": "{color.rev.inverse.grey-3",
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents .prismjs": {
+    "background-color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents .prismjs": {
+    "background-color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents .prismjs > code": {
+    "color": "{color.rev.inverse.dark-green}",
+    "font-family": "{text.fonts.code}"
+  },
+  ".v-main .contents blockquote": {
+    "background-color": "{color.rev.light-blue}",
+    "border-left-color": "{color.rev.dark-green}",
+    "color": "{color.rev.dark-green}"
+  },
+  ".theme--dark .v-main .contents blockquote": {
+    "background-color": "{color.rev.inverse.light-blue}",
+    "color": "{color.rev.inverse.dark-green}"
+  },
+  ".v-main .contents blockquote.is-info": {
+    "background-color": "{color.rev.smoke}",
+    "border-color": "{color.rev.smoke}",
+    "color": "{color.rev.inverse.smoke}"
+  },
+  ".v-main .contents blockquote.is-warning": {
+    "background-color": "{color.rev.yellow}",
+    "border-color": "{color.rev.yellow}",
+    "color": "{color.rev.inverse.yellow}"
+  },
+  ".v-main .contents blockquote.is-danger": {
+    "background-color": "{color.rev.red}",
+    "border-color": "{color.rev.red}",
+    "color": "{color.rev.inverse.red}"
+  },
+  ".v-main .contents blockquote.is-success": {
+    "background-color": "{color.rev.green}",
+    "border-color": "{color.rev.green}",
+    "color": "{color.rev.inverse.green}"
+  },
+  ".theme--dark .v-main .contents blockquote.is-info": {
+    "background-color": "{color.rev.orange}",
+    "border-color": "{color.rev.orange}",
+    "color": "{color.rev.inverse.orange}"
+  },
+  ".theme--dark .v-main .contents blockquote.is-warning": {
+    "background-color": "{color.rev.smoke}",
+    "border-color": "{color.rev.smoke}",
+    "color": "{color.rev.inverse.smoke}"
+  },
+  ".theme--dark .v-main .contents blockquote.is-danger": {
+    "background-color": "{color.rev.red}",
+    "border-color": "{color.rev.red}",
+    "color": "{color.rev.inverse.red}"
+  },
+  ".theme--dark .v-main .contents blockquote.is-success": {
+    "background-color": "{color.rev.green}",
+    "border-color": "{color.rev.primary}",
+    "color": "{color.rev.inverse.green}"
+  },
+  ".v-main .contents .admonitionblock.note td.icon": {
+    "background-color": "{color.rev.3}",
+    "color": "{color.rev.smoke}"
+  },
+  ".v-main .contents .admonitionblock.note td.content": {
+    "background-color": "{color.rev.smoke}",
+    "color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents .admonitionblock.note td.content": {
+    "background-color": "{color.rev.orange}",
+    "color": "{color.rev.inverse.orange}"
+  },
+  ".v-main .contents .admonitionblock.tip td.icon": {
+    "background-color": "{color.rev.success}",
+    "color": "{color.rev.smoke}"
+  },
+  ".v-main .contents .admonitionblock.tip td.content": {
+    "background-color": "{color.rev.smoke}",
+    "color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents .admonitionblock.tip td.content": {
+    "background-color": "{color.rev.inverse.dark-green}",
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents .admonitionblock.warning td.icon": {
+    "background-color": "{color.rev.yellow}",
+    "color": "{color.rev.inverse.yellow}"
+  },
+  ".v-main .contents .admonitionblock.warning td.content": {
+    "background-color": "{color.rev.yellow}",
+    "color": "{color.rev.inverse.yellow}"
+  },
+  ".theme--dark .v-main .contents .admonitionblock.warning td.content": {
+    "background-color": "{color.rev.inverse.yellow}",
+    "color": "{color.rev.inverse.yellow}"
+  },
+  ".v-main .contents .admonitionblock.caution td.icon": {
+    "background-color": "{color.rev.orange}",
+    "color": "{color.rev.inverse.orange}"
+  },
+  ".v-main .contents .admonitionblock.caution td.content": {
+    "background-color": "{color.rev.orange}",
+    "color": "{color.rev.inverse.orange}"
+  },
+  ".theme--dark .v-main .contents .admonitionblock.caution td.content": {
+    "background-color": "{color.rev.orange}",
+    "color": "{color.rev.inverse.orange}"
+  },
+  ".v-main .contents .admonitionblock.important td.icon": {
+    "background-color": "{color.rev.red}",
+    "color": "{color.rev.inverse.red}"
+  },
+  ".v-main .contents .admonitionblock.important td.content": {
+    "background-color": "{color.rev.red}",
+    "color": "{color.rev.inverse.red}"
+  },
+  ".theme--dark .v-main .contents .admonitionblock.important td.content": {
+    "background-color": "{color.rev.red}",
+    "color": "{color.rev.inverse.red}"
+  },
+  ".v-main .contents table": {
+    "border-color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents table": {
+    "border-color": "{color.rev.light}"
+  },
+  ".v-main .contents table th": {
+    "color": "{color.rev.dark}",
+    "background-color": "{color.rev.light}",
+    "border-bottom-color": "{color.dark}"
+  },
+  ".theme--dark .v-main .contents table th": {
+    "background-color": "{color.rev.light}",
+    "border-bottom-color": "{color.rev.dark}",
+    "color": "{color.rev.inverse.light}"
+  },
+  ".v-main .contents table tr td": {
+    "border-bottom-color": "{color.rev.dark}",
+    "border-right-color": "{color.dark}"
+  },
+  ".theme--dark .v-main .contents table tr td": {
+    "border-bottom-color": "{color.rev.light}",
+    "border-right-color": "{color.rev.light}"
+  },
+  ".v-main .contents figure.image figcaption": {
+    "color": "{color.rev.light-green}",
+    "background-color": "{color.rev.dark-green}"
+  },
+  ".theme--dark .v-main .contents figure.image figcaption": {
+    "color": "{color.rev.inverse.light-green}",
+    "background-color": "{color.rev.inverse.dark-green}"
+  },
+  ".v-main .contents details": {
+    "background-color": "{color.rev.light}",
+    "border-color": "{color.rev.dark}"
+  },
+  ".v-main .contents details > summary": {
+    "background-color": "{color.rev.light}"
+  },
+  ".v-main .contents details[open] > summary": {
+    "background-color": "{color.rev.grey.light}",
+    "border-bottom-color": "{color.rev.dark}"
+  },
+  ".theme--dark .v-main .contents details": {
+    "background-color": "{color.rev.inverse.light}",
+    "border-color": "{color.rev.inverse.dark}"
+  },
+  ".theme--dark .v-main .contents details > summary": {
+    "background-color": "{color.rev.light}",
+    "border-color": "{color.rev.inverse.dark}"
+  },
+  ".v-main .contents mark.pen-red": {
+    "color": "{color.rev.red}"
+  },
+  ".v-main .contents mark.pen-green": {
+    "color": "{color.rev.green}"
+  },
+  ".v-main .contents mark.marker-blue": {
+    "background-color": "{color.light-blue}"
+  },
+  ".v-main .contents mark.marker-yellow": {
+    "background-color": "{color.rev.yellow}"
+  },
+  ".v-main .contents mark.marker-pink": {
+    "background-color": "{color.rev.purple}"
+  },
+  ".v-main .contents mark.marker-green": {
+    "background-color": "{color.rev.dark-green}"
+  },
+  ".v-main .contents .mention": {
+    "color": "{color.rev.light-green}"
+  },
+  ".theme--dark .v-main .contents .mention": {
+    "color": "{color.rev.light-green}"
+  },
+  ".comments-header": {
+    "background-color": "{color.rev.light}",
+    "color": "{color.rev.inverse.dark}"
+  },
+  ".theme--dark .comments-header": {
+    "background-color": "{color.rev.inverse.light}"
+  },
+  ".comments-main": {
+    "background-color": "{color.rev.light}"
+  },
+  ".theme--dark .comments-main": {
+    "background-color": "{color.rev.inverse.light}"
+  }
+}

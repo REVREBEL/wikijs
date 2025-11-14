@@ -84,7 +84,8 @@ module.exports = () => {
       _.set(WIKI.config, 'features', {
         featurePageRatings: true,
         featurePageComments: true,
-        featurePersonalWikis: true
+        featurePersonalWikis: true,
+        featureMultiGitProfiles: false
       })
       _.set(WIKI.config, 'graphEndpoint', 'https://graph.requarks.io')
       _.set(WIKI.config, 'host', req.body.siteUrl)

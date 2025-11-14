@@ -1,0 +1,191 @@
+@import "../../rebel-style-framework/build/css/_variables.css";
+
+$rebel-font-body: var(--text-fonts-body, 'General Sans', 'Public Sans', 'Andale Mono', tahoma, sans-serif);
+$rebel-font-headline: var(--text-fonts-headline, 'Khand', 'Oswald', 'Impact', sans-serif);
+$rebel-font-code: var(--text-fonts-code, 'Fira Code', courier, monospace);
+$rebel-font-special: var(--text-fonts-special, 'Supreme', 'General Sans', 'Public Sans', 'Andale Mono', tahoma, sans-serif);
+
+$rebel-color-text: var(--color-rev-text, #163666);
+$rebel-color-text-inverse: var(--color-rev-inverse-text, #fafafa);
+$rebel-color-surface: var(--color-theme-surface, #fafafa);
+$rebel-color-surface-dark: var(--color-rev-dark, #163666);
+$rebel-color-link: var(--color-rev-green, #00a6b6);
+$rebel-color-link-inverse: var(--color-rev-inverse-green, #faca78);
+
+body {
+  font-family: $rebel-font-body;
+  color: $rebel-color-text;
+  background-color: $rebel-color-surface;
+}
+
+.v-application {
+  font-family: $rebel-font-body;
+  color: $rebel-color-text;
+
+  .v-main .contents {
+    font-family: $rebel-font-body;
+    color: $rebel-color-text;
+
+    a {
+      color: $rebel-color-link;
+
+      @at-root .theme--dark & {
+        color: $rebel-color-link-inverse;
+      }
+    }
+
+    code,
+    pre,
+    kbd,
+    samp {
+      font-family: $rebel-font-code;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: $rebel-font-headline;
+      color: $rebel-color-surface-dark;
+
+      @at-root .theme--dark & {
+        color: $rebel-color-text-inverse;
+      }
+    }
+  }
+
+  &.theme--dark {
+    color: $rebel-color-text-inverse;
+
+    .v-main .contents {
+      color: $rebel-color-text-inverse;
+    }
+  }
+
+  .v-btn {
+    font-family: $rebel-font-headline;
+    font-weight: var(--component-button-font-weight, 700);
+    letter-spacing: var(--component-button-letter-spacing, 0.05em);
+  }
+
+  .v-chip {
+    font-family: $rebel-font-body;
+    font-weight: var(--text-weights-medium, 600);
+  }
+
+  .v-card {
+    background-color: var(--component-card-color-light-background, #fafafa);
+    color: var(--component-card-color-light-text, #163666);
+    box-shadow: var(--component-card-shadow, 0 0 0 2px #163666, 6px 6px 0 0 #163666);
+
+    &--flat {
+      box-shadow: none;
+    }
+  }
+
+  &.theme--dark .v-card {
+    background-color: var(--component-card-color-dark-background, #163666);
+    color: var(--component-card-color-dark-text, #fafafa);
+    box-shadow: 0 0 0 2px var(--component-card-color-dark-shadow, #fafafa);
+  }
+}
+
+@mixin rebel-variant($name, $bg, $text, $border) {
+  .v-application {
+    .v-btn.#{$name} {
+      background-color: $bg !important;
+      border-color: $border !important;
+      color: $text !important;
+    }
+
+    .v-btn.#{$name}.v-btn--outlined,
+    .v-btn.#{$name}.v-btn--text {
+      background-color: transparent !important;
+      border-color: $border !important;
+      color: $bg !important;
+    }
+
+    .v-chip.#{$name} {
+      background-color: $bg !important;
+      border-color: $border !important;
+      color: $text !important;
+    }
+
+    .v-chip.#{$name}.v-chip--outlined {
+      background-color: transparent !important;
+      border-color: $border !important;
+      color: $bg !important;
+    }
+
+    .#{$name}--text,
+    .text--#{$name} {
+      color: $bg !important;
+
+      svg,
+      path {
+        fill: currentColor;
+      }
+    }
+  }
+}
+
+@include rebel-variant('primary', var(--color-rev-primary, #163666), var(--color-rev-inverse-primary, #b2d3de), var(--color-rev-primary, #163666));
+@include rebel-variant('secondary', var(--color-rev-grey-grey-2, #575757), var(--color-rev-inverse-grey-grey-2, #fafafa), var(--color-rev-grey-grey-2, #575757));
+@include rebel-variant('accent', var(--color-rev-orange, #f37d59), var(--color-rev-inverse-orange, #163666), var(--color-rev-orange, #f37d59));
+@include rebel-variant('success', var(--color-rev-green, #00a6b6), var(--color-rev-inverse-green, #faca78), var(--color-rev-green, #00a6b6));
+@include rebel-variant('info', var(--color-rev-light-blue, #b2d3de), var(--color-rev-inverse-light-blue, #163666), var(--color-rev-light-blue, #b2d3de));
+@include rebel-variant('warning', var(--color-rev-yellow, #faca78), var(--color-rev-inverse-yellow, #e05047), var(--color-rev-yellow, #faca78));
+@include rebel-variant('error', var(--color-rev-red, #e05047), var(--color-rev-inverse-red, #b2d3de), var(--color-rev-red, #e05047));
+@include rebel-variant('green', var(--color-rev-green, #00a6b6), var(--color-rev-inverse-green, #faca78), var(--color-rev-green, #00a6b6));
+@include rebel-variant('teal', var(--color-rev-dark-green, #047c97), var(--color-rev-inverse-dark-green, #eff5f6), var(--color-rev-dark-green, #047c97));
+@include rebel-variant('blue', var(--color-rev-primary, #163666), var(--color-rev-inverse-primary, #b2d3de), var(--color-rev-primary, #163666));
+@include rebel-variant('red', var(--color-rev-red, #e05047), var(--color-rev-inverse-red, #b2d3de), var(--color-rev-red, #e05047));
+@include rebel-variant('orange', var(--color-rev-orange, #f37d59), var(--color-rev-inverse-orange, #163666), var(--color-rev-orange, #f37d59));
+@include rebel-variant('amber', var(--color-rev-yellow, #faca78), var(--color-rev-inverse-yellow, #e05047), var(--color-rev-yellow, #faca78));
+@include rebel-variant('yellow', var(--color-rev-yellow, #faca78), var(--color-rev-inverse-yellow, #e05047), var(--color-rev-yellow, #faca78));
+@include rebel-variant('purple', var(--color-rev-purple, #8e456a), var(--color-rev-inverse-purple, #f37d59), var(--color-rev-purple, #8e456a));
+@include rebel-variant('grey', var(--color-rev-grey-grey-1, #ababab), var(--color-rev-inverse-grey-grey-1, #2e2e2e), var(--color-rev-grey-grey-1, #ababab));
+@include rebel-variant('smoke', var(--color-rev-smoke, #eff5f6), var(--color-rev-inverse-smoke, #163666), var(--color-rev-smoke, #eff5f6));
+@include rebel-variant('dark', var(--color-rev-dark, #163666), var(--color-rev-inverse-dark, #fafafa), var(--color-rev-dark, #163666));
+@include rebel-variant('light', var(--color-rev-light, #fafafa), var(--color-rev-inverse-light, #163666), var(--color-rev-light, #fafafa));
+
+.v-application {
+  .v-btn:not(.v-btn--text):not(.v-btn--outlined) {
+    background-color: var(--component-button-color-primary-background, #163666);
+    border-color: var(--component-button-color-primary-border, #163666);
+    color: var(--component-button-color-primary-text, #b2d3de);
+  }
+
+  .v-btn.v-btn--text,
+  .v-btn.v-btn--outlined {
+    color: var(--component-button-color-primary-background, #163666);
+  }
+
+  .v-chip {
+    background-color: var(--component-button-color-smoke-background, #eff5f6);
+    border-color: var(--component-button-color-smoke-border, #eff5f6);
+    color: var(--component-button-color-smoke-text, #163666);
+  }
+
+  .v-chip.v-chip--outlined {
+    background-color: transparent;
+    color: var(--component-button-color-primary-background, #163666);
+    border-color: var(--component-button-color-primary-border, #163666);
+  }
+
+  .grey.lighten-4,
+  .grey.lighten-5 {
+    background-color: var(--color-rev-smoke, #eff5f6) !important;
+    color: var(--color-rev-inverse-smoke, #163666) !important;
+    border-color: var(--color-rev-smoke, #eff5f6) !important;
+  }
+
+  .grey.darken-4,
+  .grey.darken-5 {
+    background-color: var(--color-rev-grey-grey-3, #2e2e2e) !important;
+    color: var(--color-rev-inverse-grey-grey-3, #ababab) !important;
+    border-color: var(--color-rev-grey-grey-3, #2e2e2e) !important;
+  }
+}

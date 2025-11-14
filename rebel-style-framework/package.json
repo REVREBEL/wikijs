@@ -1,0 +1,14 @@
+{
+  "name": "rebel-style-framework",
+  "version": "1.0.0",
+  "description": "Style Dictionary implementation for Rebel style tokens",
+  "main": "build.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node build.js",
+    "build:esm": "node build-tokens.mjs"
+  },
+  "dependencies": {
+    "style-dictionary": "^5.1.1"
+  }
+}

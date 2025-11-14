@@ -28,6 +28,11 @@ module.exports = async () => {
 
   const mw = autoload(path.join(WIKI.SERVERPATH, '/middlewares'))
   const ctrl = autoload(path.join(WIKI.SERVERPATH, '/controllers'))
+  try {
+    WIKI.logger.info(`Controllers loaded: ${Object.keys(ctrl).join(', ')}`)
+  } catch (err) {
+    WIKI.logger.warn(`Unable to list controllers: ${err.message}`)
+  }
 
   // ----------------------------------------
   // Define Express App
@@ -91,7 +96,51 @@ module.exports = async () => {
   // GraphQL Server
   // ----------------------------------------
 
-  app.use(bodyParser.json({ limit: WIKI.config.bodyParserLimit || '1mb' }))
+  const playgroundCDNBase = 'https://cdn.jsdelivr.net/npm/@apollographql/graphql-playground-react@1.7.42/build'
+  const GRAPHQL_PLAYGROUND_HTML = `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GraphQL Playground</title>
+    <link rel="stylesheet" href="${playgroundCDNBase}/static/css/index.css" />
+    <link rel="shortcut icon" href="${playgroundCDNBase}/favicon.png" />
+    <script src="${playgroundCDNBase}/static/js/middleware.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener('load', function () {
+        GraphQLPlayground.init(document.getElementById('root'), {
+          endpoint: '/graphql',
+          settings: { 'request.credentials': 'include' }
+        })
+      })
+    </script>
+  </body>
+</html>`
+
+  app.use('/graphql', (req, res, next) => {
+    const isHtmlRequest = req.accepts('html')
+    const hasQueryParams = req.query && (req.query.query || req.query.operationName || req.query.extensions)
+
+    if (req.method === 'GET' && !hasQueryParams && isHtmlRequest) {
+      res
+        .status(200)
+        .type('html')
+        .set('Cache-Control', 'no-store')
+        .send(GRAPHQL_PLAYGROUND_HTML)
+      return
+    }
+
+    return next()
+  })
+
+  app.use(bodyParser.json({
+    limit: WIKI.config.bodyParserLimit || '1mb',
+    verify: (req, res, buf) => {
+      req.rawBody = buf
+    }
+  }))
   await WIKI.servers.startGraphQL()
 
   // ----------------------------------------
@@ -164,6 +213,10 @@ module.exports = async () => {
 
   app.use('/', ctrl.auth)
   app.use('/', ctrl.upload)
+  const storageGitCtrl = ctrl['storage-git'] || ctrl.storageGit
+  if (storageGitCtrl) {
+    app.use('/', storageGitCtrl)
+  }
   app.use('/', ctrl.common)
 
   // ----------------------------------------

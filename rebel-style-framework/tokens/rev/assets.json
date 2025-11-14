@@ -1,0 +1,28 @@
+{
+  "asset": {
+    "$type": "asset",
+    "socials": {
+      "outline": {
+        "linkedin": { "value": "../images/socials/linkedin-outline.svg" },
+        "blog": { "value": "../images/socials/blog-outline.svg" },
+        "facebook": { "value": "../images/socials/facebook-outline.svg" },
+        "github": { "value": "../images/socials/github-outline.svg" },
+        "google": { "value": "../images/socials/google-outline.svg" },
+        "instagram": { "value": "../images/socials/instgram-outline.png" },
+        "x": { "value": "../images/socials/x-outline.svg" }
+      },
+      "solid": {
+        "blog": { "value": "../images/socials/blog-solid.svg" },
+        "rss": { "value": "../images/socials/rss-solid.svg" },
+        "email": { "value": "../images/socials/email-solid.svg" },
+        "facebook": { "value": "../images/socials/facebook-solid.svg" },
+        "github": { "value": "../images/socials/github-solid.svg" },
+        "google": { "value": "../images/socials/google-solid.svg" },
+        "instagram": { "value": "../images/socials/instagram-solid.svg" },
+        "linkedin": { "value": "../images/socials/linkedin-solid.svg" },
+        "telegram": { "value": "../images/socials/telegraph-solid.svg" },
+        "x": { "value": "../images/socials/x-solid.svg" }
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "dimensions": {
+    "$type": "dimension",
+    "size": {
+      "base": {
+        "0-25x": { "value": "0.25rem" },
+        "0-5x": { "value": "0.5rem" },
+        "0-75x": { "value": "0.75rem" },
+        "1x": { "value": "1rem" },
+        "1-25x": { "value": "1.25rem" },
+        "1-5x": { "value": "1.5rem" },
+        "1-75x": { "value": "1.75rem" },
+        "2x": { "value": "2rem" },
+        "3x": { "value": "3rem" },
+        "4x": { "value": "4rem" },
+        "5x": { "value": "5rem" },
+        "6x": { "value": "6rem" },
+        "7x": { "value": "7rem" },
+        "8x": { "value": "8rem" }
+      },
+      "scale": {
+        "xxs": { "value": "0.5rem" },
+        "xs": { "value": "1rem" },
+        "sm": { "value": "2rem" },
+        "md": { "value": "3rem" },
+        "lg": { "value": "4rem" },
+        "xl": { "value": "5rem" },
+        "xxl": { "value": "6rem" }
+      },
+      "font": {
+        "s0-xl": { "value": "3.798rem" },
+        "s1-lg": { "value": "2.686rem" },
+        "s2-md": { "value": "1.899rem" },
+        "s3-base": { "value": "1.343rem" },
+        "s4-sm": { "value": "1.199rem" },
+        "s5-xs": { "value": "1.071rem" },
+        "s6-xxs": { "value": "0.956rem" },
+        "t0-xl": { "value": "1.335rem" },
+        "t1-lg": { "value": "1.192rem" },
+        "t2-md": { "value": "1.064rem" },
+        "t3-base": { "value": "0.95rem" },
+        "t4-sm": { "value": "0.848rem" },
+        "t5-xs": { "value": "0.757rem" },
+        "t6-xxs": { "value": "0.676rem" },
+        "huge": { "value": "7rem" }
+      },
+      "container": {
+        "xs": { "value": "800px" },
+        "sm": { "value": "1000px" },
+        "md": { "value": "1200px" },
+        "lg": { "value": "1440px" },
+        "xl": { "value": "1600px" },
+        "xxl": { "value": "1860px" }
+      },
+      "max-width": {
+        "xs": { "value": "340px" },
+        "sm": { "value": "900px" },
+        "md": { "value": "1280px" },
+        "lg": { "value": "1600px" },
+        "xl": { "value": "1820px" }
+      }
+    },
+    "radius": {
+      "sm": { "value": "4px" },
+      "md": { "value": "8px" },
+      "lg": { "value": "0.75rem" },
+      "xl": { "value": "1rem" },
+      "pill": { "value": "999px" },
+      "round": { "value": "100rem" }
+    },
+    "line-height": {
+      "1": { "value": 1 },
+      "1-5": { "value": 1.5 },
+      "2": { "value": 2 }
+    }
+  }
+}

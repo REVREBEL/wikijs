@@ -12,7 +12,7 @@
             v-icon mdi-help-circle
           v-btn.mx-3.animated.fadeInDown.wait-p2s(icon, outlined, color='grey', @click='refresh')
             v-icon mdi-refresh
-          v-btn.animated.fadeInDown(color='success', @click='save', depressed, large)
+          v-btn.animated.fadeInDown(color='success', @click='save', depressed, large, :disabled='isGitProfilesSelected')
             v-icon(left) mdi-check
             span {{$t('common:actions.apply')}}
 
@@ -22,11 +22,11 @@
             .subtitle-1 {{$t('admin:storage.targets')}}
           v-list(two-line, dense).py-0
             template(v-for='(tgt, idx) in targets')
-              v-list-item(:key='tgt.key', @click='selectedTarget = tgt.key', :disabled='!tgt.isAvailable')
+              v-list-item(:key='tgt.key', @click='selectedTarget = tgt.key', :disabled='!tgt.isAvailable && !isGitTarget(tgt.key)')
                 v-list-item-avatar(size='24')
                   v-icon(color='grey', v-if='!tgt.isAvailable') mdi-minus-box-outline
-                  v-icon(color='primary', v-else-if='tgt.isEnabled', v-ripple, @click='tgt.key !== `local` && (tgt.isEnabled = false)') mdi-checkbox-marked-outline
-                  v-icon(color='grey', v-else, v-ripple, @click='tgt.isEnabled = true') mdi-checkbox-blank-outline
+                  v-icon(color='primary', v-else-if='tgt.isEnabled', v-ripple, @click='tgt.key !== `local` && !isGitTarget(tgt.key) && (tgt.isEnabled = false)') mdi-checkbox-marked-outline
+                  v-icon(color='grey', v-else, v-ripple, @click='!isGitTarget(tgt.key) && (tgt.isEnabled = true)') mdi-checkbox-blank-outline
                 v-list-item-content
                   v-list-item-title.body-2(:class='!tgt.isAvailable ? `grey--text` : (selectedTarget === tgt.key ? `primary--text` : ``)') {{ tgt.title }}
                   v-list-item-subtitle: .caption(:class='!tgt.isAvailable ? `grey--text text--lighten-1` : (selectedTarget === tgt.key ? `blue--text ` : ``)') {{ tgt.description }}
@@ -51,7 +51,8 @@
                     v-icon(color='white') mdi-clock-outline
                   v-list-item-content
                     v-list-item-title.body-2 {{tgt.title}}
-                    v-list-item-subtitle.purple--text.caption {{tgt.status}}
+                    v-list-item-subtitle.purple--text.caption(v-if='!tgt.isSynthetic') {{tgt.status}}
+                    v-list-item-subtitle.purple--text.caption(v-else) {{tgt.message}}
                   v-list-item-action
                     v-progress-circular(indeterminate, :size='20', :width='2', color='purple')
                 template(v-else-if='tgt.status === `operational`')
@@ -59,13 +60,15 @@
                     v-icon(color='white') mdi-check-circle
                   v-list-item-content
                     v-list-item-title.body-2 {{tgt.title}}
-                    v-list-item-subtitle.green--text.caption {{$t('admin:storage.lastSync', { time: $options.filters.moment(tgt.lastAttempt, 'from') })}}
+                    v-list-item-subtitle.green--text.caption(v-if='!tgt.isSynthetic') {{$t('admin:storage.lastSync', { time: $options.filters.moment(tgt.lastAttempt, 'from') })}}
+                    v-list-item-subtitle.green--text.caption(v-else) {{tgt.message}}
                 template(v-else)
                   v-list-item-avatar(color='red')
                     v-icon(color='white') mdi-close-circle-outline
                   v-list-item-content
                     v-list-item-title.body-2 {{tgt.title}}
-                    v-list-item-subtitle.red--text.caption {{$t('admin:storage.lastSyncAttempt', { time: $options.filters.moment(tgt.lastAttempt, 'from') })}}
+                    v-list-item-subtitle.red--text.caption(v-if='!tgt.isSynthetic') {{$t('admin:storage.lastSyncAttempt', { time: $options.filters.moment(tgt.lastAttempt, 'from') })}}
+                    v-list-item-subtitle.red--text.caption(v-else) {{tgt.message}}
                   v-list-item-action
                     v-menu
                       template(v-slot:activator='{ on }')
@@ -80,7 +83,12 @@
               em {{$t('admin:storage.noTarget')}}
 
       v-flex(xs12, lg9)
-        v-card.wiki-form.animated.fadeInUp.wait-p2s
+        v-card.wiki-form.animated.fadeInUp.wait-p2s(v-if='isGitProfilesSelected')
+          v-toolbar(color='primary', dense, flat, dark)
+            .subtitle-1 {{gitProfilesTitle}}
+          v-card-text
+            git-profiles-manager(ref='gitProfilesManager', @updated='refreshStatus')
+        v-card.wiki-form.animated.fadeInUp.wait-p2s(v-else)
           v-toolbar(color='primary', dense, flat, dark)
             .subtitle-1 {{target.title}}
             v-spacer
@@ -224,6 +232,7 @@ import moment from 'moment'
 import momentDurationFormatSetup from 'moment-duration-format'
 
 import DurationPicker from '../common/duration-picker.vue'
+import GitProfilesManager from './admin-storage-git-profiles.vue'
 import { LoopingRhombusesSpinner } from 'epic-spinners'
 
 import statusQuery from 'gql/admin/storage/storage-query-status.gql'
@@ -236,7 +245,8 @@ momentDurationFormatSetup(moment)
 export default {
   components: {
     DurationPicker,
-    LoopingRhombusesSpinner
+    LoopingRhombusesSpinner,
+    GitProfilesManager
   },
   filters: {
     startCase(val) { return _.startCase(val) }
@@ -254,21 +264,62 @@ export default {
     }
   },
   computed: {
+    isGitProfilesSelected() {
+      return this.selectedTarget === 'git-profiles'
+    },
+    gitProfilesTitle() {
+      return this.$t('admin:storage.gitProfiles.navTitle', { defaultValue: 'Git Profiles' })
+    },
     activeTargets() {
-      return _.filter(this.targets, 'isEnabled')
+      return _.filter(this.targets, tgt => tgt.isEnabled && !this.isGitTarget(tgt.key))
     }
   },
   watch: {
     selectedTarget(newValue, oldValue) {
-      this.target = _.find(this.targets, ['key', newValue]) || {}
+      if (this.isGitTarget(newValue)) {
+        this.target = {
+          key: 'git-profiles',
+          title: this.gitProfilesTitle,
+          isSynthetic: true,
+          supportedModes: []
+        }
+      } else {
+        this.target = _.find(this.targets, ['key', newValue]) || { supportedModes: [] }
+      }
     },
     targets(newValue, oldValue) {
-      this.selectedTarget = _.get(_.find(this.targets, ['isEnabled', true]), 'key', 'disk')
+      const hasSelection = _.some(newValue, ['key', this.selectedTarget])
+      if (!hasSelection) {
+        const defaultTarget = _.find(newValue, tgt => tgt.isEnabled && !this.isGitTarget(tgt.key))
+        if (defaultTarget) {
+          this.selectedTarget = defaultTarget.key
+        } else if (newValue.length > 0) {
+          this.selectedTarget = newValue[0].key
+        } else {
+          this.selectedTarget = ''
+        }
+      }
     }
   },
   methods: {
+    isGitTarget(key) {
+      return key === 'git-profiles'
+    },
     async refresh() {
-      await this.$apollo.queries.targets.refetch()
+      const tasks = []
+      if (this.$apollo.queries.targets) {
+        tasks.push(this.$apollo.queries.targets.refetch())
+      }
+      if (this.$apollo.queries.status) {
+        tasks.push(this.$apollo.queries.status.refetch())
+      }
+      if (tasks.length > 0) {
+        await Promise.all(tasks)
+      }
+      const child = this.$refs.gitProfilesManager
+      if (child && typeof child.loadProfiles === 'function') {
+        await child.loadProfiles(false)
+      }
       this.$store.commit('showNotification', {
         message: 'List of storage targets has been refreshed.',
         style: 'success',
@@ -276,11 +327,16 @@ export default {
       })
     },
     async save() {
+      if (this.isGitProfilesSelected) {
+        return
+      }
       this.$store.commit(`loadingStart`, 'admin-storage-savetargets')
       await this.$apollo.mutate({
         mutation: targetsSaveMutation,
         variables: {
-          targets: this.targets.map(tgt => _.pick(tgt, [
+          targets: this.targets
+            .filter(tgt => !this.isGitTarget(tgt.key))
+            .map(tgt => _.pick(tgt, [
             'isEnabled',
             'key',
             'config',
@@ -323,7 +379,24 @@ export default {
       this.runningAction = false
       this.runningActionHandler = ''
       this.$store.commit(`loadingStop`, 'admin-storage-executeaction')
-    }
+    },
+
+    async refreshStatus () {
+      const tasks = []
+      if (this.$apollo.queries.status) {
+        tasks.push(this.$apollo.queries.status.refetch())
+      }
+      if (this.$apollo.queries.targets) {
+        tasks.push(this.$apollo.queries.targets.refetch())
+      }
+      if (tasks.length > 0) {
+        await Promise.all(tasks)
+      }
+      const child = this.$refs.gitProfilesManager
+      if (child && typeof child.loadProfiles === 'function') {
+        await child.loadProfiles(false)
+      }
+    },
   },
   apollo: {
     targets: {
@@ -331,10 +404,12 @@ export default {
       fetchPolicy: 'network-only',
       update: (data) => _.cloneDeep(data.storage.targets).map(str => ({
         ...str,
-        config: _.sortBy(str.config.map(cfg => ({
-          ...cfg,
-          value: JSON.parse(cfg.value)
-        })), [t => t.value.order])
+        config: Array.isArray(str.config)
+          ? _.sortBy(str.config.map(cfg => ({
+            ...cfg,
+            value: JSON.parse(cfg.value)
+          })), [t => t.value.order])
+          : []
       })),
       watchLoading (isLoading) {
         this.$store.commit(`loading${isLoading ? 'Start' : 'Stop'}`, 'admin-storage-targets-refresh')

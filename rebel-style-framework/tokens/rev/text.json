@@ -1,0 +1,52 @@
+{
+  "text": {
+    "$type": "dimension",
+    "fonts": {
+      "body": {
+        "value": "'General Sans', 'Public Sans', 'Andale Mono', tahoma, sans-serif"
+      },
+      "code": {
+        "value": "'Fira Code', courier, monospace"
+      },
+      "headline": {
+        "value": "'Khand', 'Oswald', 'Impact', sans-serif"
+      },
+      "special": {
+        "value": "'Supreme', 'General Sans', 'Public Sans', 'Andale Mono', tahoma, sans-serif"
+      }
+    },
+    "sizes": {
+      "heading": {
+        "value": "{dimensions.size.font.s0-xl}"
+      },
+      "body": {
+        "value": "{dimensions.size.font.s3-base}"
+      }
+    },
+    "weights": {
+      "body": {
+        "value": "300"
+      },
+      "regular": {
+        "value": "400"
+      },
+      "medium": {
+        "value": "600"
+      },
+      "bold": {
+        "value": "700"
+      }
+    },
+    "typography": {
+      "body": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{text.fonts.body}",
+          "fontWeight": "{text.weights.regular}",
+          "fontSize": "{text.sizes.body}",
+          "lineHeight": "{dimensions.line-height.1-5}"
+        }
+      }
+    }
+  }
+}

@@ -122,6 +122,11 @@ module.exports = {
    */
   async applyFlags() {
     WIKI.models.knex.client.config.debug = WIKI.config.flags.sqllog
+    if (!_.isNil(process.env.FEATURE_MULTI_GIT_PROFILES)) {
+      const flagValue = _.toString(process.env.FEATURE_MULTI_GIT_PROFILES).toLowerCase()
+      const enabled = ['true', '1', 'yes', 'on'].includes(flagValue)
+      _.set(WIKI.config, 'features.featureMultiGitProfiles', enabled)
+    }
   },
 
   /**

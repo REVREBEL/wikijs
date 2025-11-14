@@ -81,6 +81,7 @@ defaults:
       featurePageRatings: true
       featurePageComments: true
       featurePersonalWikis: true
+      featureMultiGitProfiles: false
     security:
       securityOpenRedirect: true
       securityIframe: true

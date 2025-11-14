@@ -52,6 +52,7 @@ type SiteMutation {
     featurePageRatings: Boolean
     featurePageComments: Boolean
     featurePersonalWikis: Boolean
+    featureMultiGitProfiles: Boolean
     securityOpenRedirect: Boolean
     securityIframe: Boolean
     securityReferrerPolicy: Boolean
@@ -102,6 +103,7 @@ type SiteConfig {
   featurePageRatings: Boolean
   featurePageComments: Boolean
   featurePersonalWikis: Boolean
+  featureMultiGitProfiles: Boolean
   securityOpenRedirect: Boolean
   securityIframe: Boolean
   securityReferrerPolicy: Boolean

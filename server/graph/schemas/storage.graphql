@@ -44,6 +44,7 @@ type StorageTarget {
   key: String!
   title: String!
   description: String
+  isSynthetic: Boolean
   logo: String
   website: String
   supportedModes: [String]
@@ -68,7 +69,8 @@ type StorageStatus {
   title: String!
   status: String!
   message: String!
-  lastAttempt: String!
+  lastAttempt: String
+  isSynthetic: Boolean
 }
 
 type StorageTargetAction {
